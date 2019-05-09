@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.352
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Prueba Lucera", "Prueba Lucera.csproj", "{7CA66B82-CCBF-4497-89CE-0E48C4CD0677}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7CA66B82-CCBF-4497-89CE-0E48C4CD0677}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CA66B82-CCBF-4497-89CE-0E48C4CD0677}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CA66B82-CCBF-4497-89CE-0E48C4CD0677}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CA66B82-CCBF-4497-89CE-0E48C4CD0677}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8039AE45-7CD5-4647-B93B-1A43448D2A64}
+	EndGlobalSection
+EndGlobal
