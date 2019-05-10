@@ -58,11 +58,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Codes\Controller\BaseCodeController.cs" />
+    <Compile Include="Codes\Controller\CodeController.cs" />
     <Compile Include="Codes\Interfaces\CodeInterface.cs" />
     <Compile Include="MainProgram.cs" />
     <Compile Include="Codes\Helpers\MorseCodeHelper.cs" />
-    <Compile Include="Codes\Controller\MorseCodeController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -10,7 +10,6 @@ namespace Prueba_Lucera
     //TODO: Abstraer los metodos que serian equivalentes en todas las clases de este tipo
     public class MorseCodeHelper : CodeInterface
     {
-        private Dictionary<char, string> morseCodification = new Dictionary<char, string>();
         private readonly List<char> origin;
         private readonly List<string> codification;
 
@@ -46,9 +45,14 @@ namespace Prueba_Lucera
         /// </summary>
         /// <param name="word">cadena codificada</param>
         /// <returns></returns>
-        public string DecodeWord(string word)
+        public List<string> DecodeWord(string word)
         {
-            return codification.Find(x => x == word);
+            throw new NotImplementedException();
+        }
+
+        public List<string> DecodeWordDictionary(string sentence, Dictionary<string, string> dictionary)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>

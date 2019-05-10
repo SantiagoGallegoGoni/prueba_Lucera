@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Prueba_Lucera
 {
-    class BaseCodeController
+    class CodeController
     {
         protected CodeInterface codification;
         protected Dictionary<string,string> dictionary = new Dictionary<string, string>();
 
         public string sentence { get; internal set; }
 
-        public BaseCodeController()
+        public CodeController()
         {
             this.codification = null;
             this.dictionary = null;
@@ -24,7 +24,7 @@ namespace Prueba_Lucera
         /// Indica el tipo de codificacion
         /// </summary>
         /// <param name="code">Values: Morse</param>
-        public void setCodificacion(string code)
+        public void SetCodificacion(string code)
         {
             switch (code)
             {
@@ -41,14 +41,43 @@ namespace Prueba_Lucera
         /// Crea el diccionario con las palabras más comunes
         /// </summary>
         /// <param name="input">Un string con las palabras separadas por salto de linea</param>
-        public void setDictionary(string input) //TODO: Hacer que el separador se pase y sea dinámico
+        public void SetDictionary(string input) //TODO: Hacer que el separador se pase y sea dinámico
         {
             List<string> inputSeparated = input.Split(new string[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries).ToList();
             foreach (string word in inputSeparated)
             {
-                codification.EncodeWord(word);
+                dictionary.Add(input, codification.EncodeWord(word));
             }
         }
 
+        /// <summary>
+        /// Desencripta la cadena y devuelve un listado con las posibilidades
+        /// </summary>
+        /// <returns></returns>
+        public List<string> decrypt()
+        {
+            if (codification == null)
+            {
+                throw new NullReferenceException("Debe de asignar una codificación");
+            }
+            else if (sentence == null)
+            {
+                throw new NullReferenceException("Debe de asignar una frase a decodificar");
+            }
+            else
+            {
+                List<string> result = new List<string>();
+                if (dictionary != null) //con diccionario
+                {
+                    result = codification.DecodeWordDictionary(sentence, dictionary);
+                }
+                else //sin diccionario
+                {
+                    result = codification.DecodeWord(sentence);
+                }
+
+                return result;
+            }
+        }
     }
 }

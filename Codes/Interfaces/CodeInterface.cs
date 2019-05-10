@@ -10,8 +10,8 @@ namespace Prueba_Lucera
     {
         char Decode(string word);
         string Encode(char letter);
-        string DecodeWord(string word);
+        List<string> DecodeWord(string word);
         string EncodeWord(string word);
-
+        List<string> DecodeWordDictionary(string sentence, Dictionary<string, string> dictionary);
     }
 }

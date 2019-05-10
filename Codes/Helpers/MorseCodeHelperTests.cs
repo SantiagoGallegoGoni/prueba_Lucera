@@ -52,5 +52,17 @@ namespace Prueba_Lucera.Tests
             resultado = morse.Encode(original);
             Assert.AreEqual(esperado, resultado);
         }
+
+        [TestMethod()]
+        public void EncodeWordTest()
+        {
+            string original = "HOLAMUNDO";
+            string esperado = "....---.-...---..--.-..---";
+
+            var morse = new MorseCodeHelper();
+
+            string resultado = morse.EncodeWord(original);
+            Assert.AreEqual(esperado, resultado);
+        }
     }
 }

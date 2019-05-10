@@ -19,7 +19,7 @@ namespace Prueba_Lucera
             {
                 if (args.Length == 3)
                 {
-                    MorseCodeController codeController = new MorseCodeController();
+                    CodeController codeController = new CodeController();
                     for (int i = 0; i < args.Length; i++)
                     {
                         string argument = args[i];
@@ -27,10 +27,10 @@ namespace Prueba_Lucera
                         switch (i)
                         {
                             case 0:
-                                codeController.setCodificacion(argument);
+                                codeController.SetCodificacion(argument);
                                 break;
                             case 1:
-                                codeController.setDictionary(argument);
+                                codeController.SetDictionary(argument);
                                 break;
                             case 2:
                                 codeController.sentence = argument;
