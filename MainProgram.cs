@@ -17,29 +17,37 @@ namespace Prueba_Lucera
             }
             else
             {
-                CodeController codeController = new CodeController();
-                for (int i = 0; i < args.Length; i++)
+                if (args.Length == 3)
                 {
-                    string argument = args[i];
-                    //TODO: Mejorar esto, que lo detecte por parametros rollo -L
-                    switch (i)
+                    MorseCodeController codeController = new MorseCodeController();
+                    for (int i = 0; i < args.Length; i++)
                     {
-                        case 0:
-                            codeController.setCodificacion(argument);
-                        break;
-                        case 1:
-                            codeController.setDictionary(argument);
-                        break;
-                        case 2:
-                            codeController.sentence = argument;
-                        break;
-                        default:
-                            //TODO: too many arguments
-                        break;
+                        string argument = args[i];
+                        //TODO: Mejorar esto, que lo detecte por parametros rollo -L
+                        switch (i)
+                        {
+                            case 0:
+                                codeController.setCodificacion(argument);
+                                break;
+                            case 1:
+                                codeController.setDictionary(argument);
+                                break;
+                            case 2:
+                                codeController.sentence = argument;
+                                break;
+                        }
+
                     }
 
+                    List<string> resultados = codeController.decrypt();
+
+                    return 0;
                 }
-                return 0;
+                else //too many arguments
+                {
+                    return 1;//TODO: mirar codigo error devuelto
+                }
+
             }
         }
     }

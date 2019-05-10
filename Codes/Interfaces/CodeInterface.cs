@@ -8,8 +8,10 @@ namespace Prueba_Lucera
 {
     interface CodeInterface
     {
-        string Decode(string word);
-        char Encode(char letter);
+        char Decode(string word);
+        string Encode(char letter);
+        string DecodeWord(string word);
+        string EncodeWord(string word);
 
     }
 }
