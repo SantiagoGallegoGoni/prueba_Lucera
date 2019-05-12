@@ -58,7 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Codes\Controller\CodeController.cs" />
+    <Compile Include="Codes\Controllers\CodeController.cs" />
     <Compile Include="Codes\Interfaces\CodeInterface.cs" />
     <Compile Include="MainProgram.cs" />
     <Compile Include="Codes\Helpers\MorseCodeHelper.cs" />

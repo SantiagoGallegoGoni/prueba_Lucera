@@ -26,7 +26,7 @@ namespace Prueba_Lucera
         string Encode(char letter);
 
         /// <summary>
-        /// Decodifica una cadena codificada
+        /// Decodifica una cadena codificada con todas las posibilidades diferentes
         /// </summary>
         /// <param name="word">cadena codificada</param>
         /// <returns></returns>
@@ -42,9 +42,9 @@ namespace Prueba_Lucera
         /// <summary>
         /// Decodifica una cadena codificada con el uso de un diccionario
         /// </summary>
-        /// <param name="sentence"></param>
-        /// <param name="dictionary"></param>
+        /// <param name="sentence">Frase a decodificar</param>
+        /// <param name="dictionary">Diccionaro con clave-valor = original-codificado</param>
         /// <returns></returns>
-        List<char> DecodeWordDictionary(string sentence, Dictionary<string, string> dictionary);
+        List<string> DecodeWordDictionary(string sentence, Dictionary<string, string> dictionary);
     }
 }

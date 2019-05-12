@@ -23,8 +23,7 @@ namespace Prueba_Lucera
             codification = new string[] { ".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.", "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--.." }.ToList();
             codificationOrdenada = new string[] { ".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.", "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--.." }.OrderBy(x => x.Length).ToList();
         }
-
-        
+     
         public char Decode(string word) 
         {
             try
@@ -37,62 +36,76 @@ namespace Prueba_Lucera
                 return char.MinValue;
             }
         }
-
-     
+   
         public List<string> DecodeWord(string word)
         {
             string resultado = "";
             List<string> resultadoLista = new List<string>();
 
-            //Obtengo una lista de todas aquellas letras que serían válidas para el inicio de word, empezando por las mas cortas
-            int i = 0;
+            //Obtengo una lista de todas aquellas letras que serían válidas para el inicio de word, empezando por las mas cortas para evaluar todas las opciones
             foreach (string itemCodificado in codificationOrdenada)
             {
                 if (word.StartsWith(itemCodificado))
                 {
-                    char caracterDecodificado = Decode(itemCodificado);
-                    resultado = caracterDecodificado.ToString();
+                    resultado = Decode(itemCodificado).ToString();
                                                                                                                                                 
                     string wordReducida = word.Substring(itemCodificado.Length);//le quito a la cadena el caracter decodificado
-                    if(wordReducida.Length == 0)//terminé
+                    if(wordReducida.Length == 0)//nada más a decodificar, devuelvo mi resultado como una lista de un solo item
                     {
                         resultadoLista.Add(resultado);
                         return resultadoLista;
                     }
-                    //Concateno la siguiente codificación encontrada
-                    foreach (string resultadoVariacion in DecodeWord(wordReducida))
+                    //Agrego a mi listado de resultados los resultados de codificar el resto de la cadena
+                    foreach (string resultadoPosible in DecodeWord(wordReducida))
                     {
-                        resultadoLista.Add(resultado+resultadoVariacion); //Agrego el caracter a la posible solucion
-                    }
-                    
+                        resultadoLista.Add(resultado + resultadoPosible); //Agrego el caracter a la posible solucion
+                    }                    
                 }
-                i++;
             }
             return resultadoLista;
         }
 
-        public List<char> DecodeWordDictionary(string sentence, Dictionary<string, string> dictionary)
+        public List<string> DecodeWordDictionary(string sentence, Dictionary<string, string> dictionary)
         {
-            List<char> resultado = new List<char>();
+            Dictionary<string, string> diccionarioOrdenado = dictionary.OrderBy(x => x.Value.Length).ToDictionary(v => v.Key, v => v.Value);
+            //TODO: sacar esto de aqui
 
-            //Obtengo una lista de palabras en el diccionario que serían válidas para el inicio de sentence
+            string resultado = "";
+            List<string> resultadoLista = new List<string>();
+          
+            //Obtengo una lista de todas aquellas palabras del diccionario que serían válidas para el inicio de sentence, empezando por las mas cortas para evaluar todas las opciones
+            foreach (KeyValuePair<string, string> itemDiccionario in diccionarioOrdenado)
+            {
+                if (sentence.StartsWith(itemDiccionario.Value))
+                {
+                    resultado = itemDiccionario.Key;
 
-
-            return resultado;
+                    string wordReducida = sentence.Substring(itemDiccionario.Value.Length);//le quito a la cadena el caracter decodificado
+                    if (wordReducida.Length == 0)//nada más a decodificar, devuelvo mi resultado como una lista de un solo item
+                    {
+                        resultadoLista.Add(resultado);
+                        return resultadoLista;
+                    }
+                    //Agrego a mi listado de resultados los resultados de codificar el resto de la cadena
+                    foreach (string resultadoPosible in DecodeWordDictionary(wordReducida, dictionary))
+                    {
+                        resultadoLista.Add(resultado + " " + resultadoPosible); //Agrego el caracter a la posible solucion
+                    }
+                }
+            }
+            return resultadoLista;
         }
-
-       
+      
         public string Encode(char letter)
         {
             int index = original.IndexOf(letter);
             return codification[index];
         }
 
-        
         public string EncodeWord(string word)
         {
             string result = "";
-            List<char> listChar = word.ToList();
+            List<char> listChar = word.ToUpper().ToList();
             foreach (char caracter in listChar)
             {
                 string caracterEncoded = Encode(caracter);

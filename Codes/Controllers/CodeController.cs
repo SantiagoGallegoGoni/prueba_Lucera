@@ -10,18 +10,17 @@ namespace Prueba_Lucera
     /// Clase controladora para cualquier tipo de código. Se llamará a su helper con sus metodos especificos según se asigne el tipo
     /// de codificación
     /// </summary>
-    class CodeController
+    public class CodeController
     {
         #region variables privadas
         private ICodeHelperInterface codification;
-        private Dictionary<string, string> dictionary = new Dictionary<string, string>();
+        private Dictionary<string, string> dictionary;
         private string sentence;
         private string codificationType;
         #endregion
 
         #region geters y seters 
         public string Sentence { get => sentence; set => sentence = value; }
-        protected Dictionary<string, string> Dictionary { get => dictionary; set => dictionary = value; }
         /// <summary>
         /// Indica el tipo de codificacion
         /// </summary>
@@ -59,13 +58,16 @@ namespace Prueba_Lucera
         /// <summary>
         /// Crea el diccionario con las palabras más comunes
         /// </summary>
-        /// <param name="input">Un string con las palabras separadas por salto de linea</param>
-        public void InitDictionary(string input) //TODO: Hacer que el separador se pase y sea dinámico
+        /// <param name="file">Un string con la ruta del fichero</param>
+        public void InitDictionary(string file)
         {
-            List<string> inputSeparated = input.Split(new string[] { "\n", "\r\n" }, StringSplitOptions.RemoveEmptyEntries).ToList();
-            foreach (string word in inputSeparated)
+            string [] lineasFichero = System.IO.File.ReadAllLines(file);
+            dictionary = new Dictionary<string, string>();
+
+            foreach (string word in lineasFichero)
             {
-                dictionary.Add(input, codification.EncodeWord(word));
+                string wordCodificada = codification.EncodeWord(word);
+                dictionary.Add(word, wordCodificada);
             }
         }
 
@@ -97,11 +99,11 @@ namespace Prueba_Lucera
                 List<string> result = new List<string>();
                 if (dictionary != null) //con diccionario
                 {
-                    //result = codification.DecodeWordDictionary(sentence, dictionary);
+                    result = codification.DecodeWordDictionary(sentence, dictionary);
                 }
                 else //sin diccionario
                 {
-                    //result = codification.DecodeWord(sentence);
+                    result = codification.DecodeWord(sentence);
                 }
 
                 return result;
