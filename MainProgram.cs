@@ -27,19 +27,19 @@ namespace Prueba_Lucera
                         switch (i)
                         {
                             case 0:
-                                codeController.SetCodificacion(argument);
+                                codeController.CodificationType = argument;
                                 break;
                             case 1:
-                                codeController.SetDictionary(argument);
+                                codeController.InitDictionary(argument);
                                 break;
                             case 2:
-                                codeController.sentence = argument;
+                                codeController.Sentence = argument;
                                 break;
                         }
 
                     }
 
-                    List<string> resultados = codeController.decrypt();
+                    List<string> resultados = codeController.Decrypt();
 
                     return 0;
                 }

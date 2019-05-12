@@ -64,5 +64,60 @@ namespace Prueba_Lucera.Tests
             string resultado = morse.EncodeWord(original);
             Assert.AreEqual(esperado, resultado);
         }
+
+        [TestMethod()]
+        public void EncodeWordTest2()
+        {
+            string original = "HOLA";
+            string esperado = "....---.-...-";
+
+            var morse = new MorseCodeHelper();
+
+            string resultado = morse.EncodeWord(original);
+            Assert.AreEqual(esperado, resultado);
+        }
+
+        [TestMethod()]
+        public void DecodeWordTest()
+        {
+            string original = "-.-";
+            List<string> esperado = new List<string>();
+            esperado.Add("TET");
+            esperado.Add("TA");
+            esperado.Add("NT");
+            esperado.Add("K");
+
+            var morse = new MorseCodeHelper();
+
+            List<string> resultado = morse.DecodeWord(original);
+
+            Assert.IsTrue(resultado.Contains("TET"));
+            Assert.IsTrue(resultado.Contains("TA"));
+            Assert.IsTrue(resultado.Contains("NT"));
+            Assert.IsTrue(resultado.Contains("K"));
+            Assert.AreEqual(resultado.Count, 4);
+
+        }
+
+        [TestMethod()]
+        public void DecodeWordTest2()
+        {
+            string original = "....---.-...-";
+            string esperado = "HOLA";
+
+            var morse = new MorseCodeHelper();
+
+            List<string> resultado = morse.DecodeWord(original);
+
+            Assert.IsTrue(resultado.Contains(esperado));
+
+            original = "....--.-..";
+            esperado = "SANTI";
+
+            resultado = morse.DecodeWord(original);
+
+            Assert.IsTrue(resultado.Contains(esperado));
+
+        }
     }
 }

@@ -8,31 +8,29 @@ namespace Prueba_Lucera
 {
 
     //TODO: Abstraer los metodos que serian equivalentes en todas las clases de este tipo
-    public class MorseCodeHelper : CodeInterface
+    public class MorseCodeHelper : ICodeHelperInterface
     {
-        private readonly List<char> origin;
+        private readonly List<char> original;
         private readonly List<string> codification;
+        private readonly List<string> codificationOrdenada;
 
         /// <summary>
         /// Inicializa la codificación
         /// </summary>
         public MorseCodeHelper()
         {
-            origin = new char[] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' }.ToList();
+            original = new char[] { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' }.ToList();
             codification = new string[] { ".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.", "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--.." }.ToList();
+            codificationOrdenada = new string[] { ".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.", "--.-", ".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--.." }.OrderBy(x => x.Length).ToList();
         }
 
-        /// <summary>
-        /// Decodifica una cadena codificada solo si tiene coincidencia exacta con un caracter
-        /// </summary>
-        /// <param name="word">cadena codificada</param>
-        /// <returns></returns>
-        public char Decode(string word)
+        
+        public char Decode(string word) 
         {
             try
             {
                 int index = codification.IndexOf(word);
-                return origin[index];
+                return original[index];
             }
             catch
             {
@@ -40,37 +38,57 @@ namespace Prueba_Lucera
             }
         }
 
-        /// <summary>
-        /// Decodifica una cadena codificada
-        /// </summary>
-        /// <param name="word">cadena codificada</param>
-        /// <returns></returns>
+     
         public List<string> DecodeWord(string word)
         {
-            throw new NotImplementedException();
+            string resultado = "";
+            List<string> resultadoLista = new List<string>();
+
+            //Obtengo una lista de todas aquellas letras que serían válidas para el inicio de word, empezando por las mas cortas
+            int i = 0;
+            foreach (string itemCodificado in codificationOrdenada)
+            {
+                if (word.StartsWith(itemCodificado))
+                {
+                    char caracterDecodificado = Decode(itemCodificado);
+                    resultado = caracterDecodificado.ToString();
+                                                                                                                                                
+                    string wordReducida = word.Substring(itemCodificado.Length);//le quito a la cadena el caracter decodificado
+                    if(wordReducida.Length == 0)//terminé
+                    {
+                        resultadoLista.Add(resultado);
+                        return resultadoLista;
+                    }
+                    //Concateno la siguiente codificación encontrada
+                    foreach (string resultadoVariacion in DecodeWord(wordReducida))
+                    {
+                        resultadoLista.Add(resultado+resultadoVariacion); //Agrego el caracter a la posible solucion
+                    }
+                    
+                }
+                i++;
+            }
+            return resultadoLista;
         }
 
-        public List<string> DecodeWordDictionary(string sentence, Dictionary<string, string> dictionary)
+        public List<char> DecodeWordDictionary(string sentence, Dictionary<string, string> dictionary)
         {
-            throw new NotImplementedException();
+            List<char> resultado = new List<char>();
+
+            //Obtengo una lista de palabras en el diccionario que serían válidas para el inicio de sentence
+
+
+            return resultado;
         }
 
-        /// <summary>
-        /// Codifica un caracter
-        /// </summary>
-        /// <param name="letter">caracter a codificar</param>
-        /// <returns></returns>
+       
         public string Encode(char letter)
         {
-            int index = origin.IndexOf(letter);
+            int index = original.IndexOf(letter);
             return codification[index];
         }
 
-        /// <summary>
-        /// Codifica una palabra
-        /// </summary>
-        /// <param name="word">palabra a codificar</param>
-        /// <returns></returns>
+        
         public string EncodeWord(string word)
         {
             string result = "";
