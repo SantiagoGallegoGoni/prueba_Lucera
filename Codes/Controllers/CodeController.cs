@@ -35,8 +35,7 @@ namespace Prueba_Lucera
                         codification = new MorseCodeHelper();
                         break;
                     default:
-                        //TODO: Devolver codificacion no conocida
-                        break;
+                        throw new Exception("Codificación no válida");
                 }
             }
         }

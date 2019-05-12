@@ -36,7 +36,7 @@ namespace Prueba_Lucera.Tests
         public void DecryptTest()
         {
             string original  = "-.....-.-.---..--.-.-.-.--.....-....--..---.--..-...";
-            string esperado = "thecountryhaspeople";
+            string esperado = "the country has people";
 
             InitDictionaryTest();
             controlador.Sentence = original;

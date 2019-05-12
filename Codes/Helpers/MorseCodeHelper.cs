@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 namespace Prueba_Lucera
 {
 
-    //TODO: Abstraer los metodos que serian equivalentes en todas las clases de este tipo
     public class MorseCodeHelper : ICodeHelperInterface
     {
         private readonly List<char> original;
@@ -68,7 +67,6 @@ namespace Prueba_Lucera
         public List<string> DecodeWordDictionary(string sentence, Dictionary<string, string> dictionary)
         {
             Dictionary<string, string> diccionarioOrdenado = dictionary.OrderBy(x => x.Value.Length).ToDictionary(v => v.Key, v => v.Value);
-            //TODO: sacar esto de aqui
 
             string resultado = "";
             List<string> resultadoLista = new List<string>();
