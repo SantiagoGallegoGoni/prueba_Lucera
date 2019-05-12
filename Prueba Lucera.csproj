@@ -59,7 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Codes\Controllers\CodeController.cs" />
-    <Compile Include="Codes\Interfaces\CodeInterface.cs" />
+    <Compile Include="Codes\Interfaces\CodeHelperInterface.cs" />
     <Compile Include="MainProgram.cs" />
     <Compile Include="Codes\Helpers\MorseCodeHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
